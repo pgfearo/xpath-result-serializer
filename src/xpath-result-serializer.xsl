@@ -36,9 +36,9 @@
   
   <xsl:function name="ext:serializeXPathResult" as="item()*">
     <xsl:param name="xdmValue" as="item()*"/>
-    <xsl:message select="'saxon-versions', $saxon-major-minor-patch => string-join(', ')"/>
-    <xsl:message select="'useColors', $useColors"/>
-    <xsl:message select="'color-data', $COLOR"/>
+    <!-- <xsl:message select="'saxon-versions', $saxon-major-minor-patch => string-join(', ')"/>
+         <xsl:message select="'useColors', $useColors"/> 
+         <xsl:message select="'color-data', $COLOR"/> -->
     <xsl:variable name="enclosedItems" as="element()" select="ext:buildResultTree($xdmValue)"/>
     <xsl:sequence select="ext:xml-to-xdm($enclosedItems) || $LF"/>
   </xsl:function>
@@ -201,10 +201,12 @@
             <xsl:sequence select="$key || '{' || ext:writeEnclosedItem(node()) => string-join(',') || '}'"/>
           </xsl:when>
           <xsl:when test="self::path">
-            <xsl:value-of select="$key || '&#10;' || node()"/>
+            <xsl:value-of select="$key || $YELLOW || node() || $RESET"/>
           </xsl:when>
           <xsl:when test="self::atomicValue">
-            <xsl:value-of select="$key || node()"/>
+            <xsl:variable name="color" as="xs:string" 
+              select="if (@type eq 'string') then $BLUE else if (@type eq 'boolean') then $GREEN else if (@type eq 'numeric') then $MAGENTA else $CYAN"/>
+            <xsl:value-of select="$key || $color || node() || $RESET"/>
           </xsl:when>     
           <xsl:otherwise>
             <xsl:value-of select="$key || node()"/>
