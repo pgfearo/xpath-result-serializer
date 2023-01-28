@@ -35,13 +35,15 @@
   
   <xsl:variable name="xmlnsMap" as="map(*)" select="ext:getURItoPrefixMap(/*)"/>
   
-  <xsl:function name="ext:describe" as="item()*">
+  <xsl:function name="ext:println" as="xs:string">
     <xsl:param name="xdmValue" as="item()*"/>
-    <!-- <xsl:message select="'saxon-versions', $saxon-major-minor-patch => string-join(', ')"/>
-         <xsl:message select="'useColors', $useColors"/> 
-         <xsl:message select="'color-data', $COLOR"/> -->
+    <xsl:sequence select="ext:print($xdmValue) || $LF"/>
+  </xsl:function>
+  
+  <xsl:function name="ext:print" as="xs:string">
+    <xsl:param name="xdmValue" as="item()*"/>
     <xsl:variable name="enclosedItems" as="element()" select="ext:buildResultTree($xdmValue)"/>
-    <xsl:sequence select="ext:xml-to-xdm($enclosedItems) || $LF"/>
+    <xsl:sequence select="ext:xml-to-xdm($enclosedItems)"/>
   </xsl:function>
   
   <xsl:function name="ext:getURItoPrefixMap" as="map(xs:anyURI, xs:string)">
@@ -169,9 +171,9 @@
           </xsl:if>
           <xsl:variable name="val" select="serialize(., map {'method': 'text'})"/>
           <xsl:choose>
-            <xsl:when test=". instance of xs:boolean"><xsl:attribute name="type" select="'boolean'"/> {$val}()</xsl:when>
+            <xsl:when test=". instance of xs:boolean"><xsl:attribute name="type" select="'boolean'"/>{$val}()</xsl:when>
             <xsl:when test=". instance of xs:string"><xsl:attribute name="type" select="'string'"/>'{$val}'</xsl:when>
-            <xsl:when test=". instance of xs:numeric"><xsl:attribute name="type" select="'numeric'"/>'{$val}'</xsl:when>
+            <xsl:when test=". instance of xs:numeric"><xsl:attribute name="type" select="'numeric'"/>{$val}</xsl:when>
             <xsl:otherwise>{$val}</xsl:otherwise>
           </xsl:choose>         
         </atomicValue>       

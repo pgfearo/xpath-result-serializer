@@ -2,15 +2,230 @@
 <colors>
    <result>
       <map>
-         <map key="'start'">
-            <sequence key="1789">
-               <path>/colors[1]/red[1]</path>
-               <path>/colors[1]/green[1]</path>
-               <path>/colors[1]/blue[1]</path>
-            </sequence>
+         <map key="'properties'">
+            <map key="'messageEscaping'">
+               <array key="'enum'">
+                  <atomicValue type="string">'on'</atomicValue>
+                  <atomicValue type="string">'off'</atomicValue>
+               </array>
+               <atomicValue key="'type'" type="string">'string'</atomicValue>
+               <atomicValue key="'description'" type="string">'Set to 'off' to disable escaping of XML characters in xsl:message output (not available in Saxon 11.1+ versions)'</atomicValue>
+            </map>
+            <map key="'timing'">
+               <array key="'enum'">
+                  <atomicValue type="string">'on'</atomicValue>
+                  <atomicValue type="string">'off'</atomicValue>
+               </array>
+               <atomicValue key="'type'" type="string">'string'</atomicValue>
+               <atomicValue key="'description'" type="string">'Display version and timing information to the standard error output'</atomicValue>
+            </map>
+            <map key="'parameters'">
+               <map key="'items'">
+                  <map key="'properties'">
+                     <map key="'name'">
+                        <atomicValue key="'type'" type="string">'string'</atomicValue>
+                        <atomicValue key="'description'" type="string">'The xsl:param name. Namespaced params can be written as {uri}localname'</atomicValue>
+                     </map>
+                     <map key="'value'">
+                        <atomicValue key="'type'" type="string">'string'</atomicValue>
+                        <atomicValue key="'description'" type="string">'The xsl:param value. Special leading characters are: '?' (XPath), '!' (xsl:output), '+' (filename): See: http://www.saxonica.com/documentation/index.html#!using-xsl/commandline'</atomicValue>
+                     </map>
+                  </map>
+                  <atomicValue key="'type'" type="string">'object'</atomicValue>
+                  <array key="'required'">
+                     <atomicValue type="string">'name'</atomicValue>
+                     <atomicValue type="string">'value'</atomicValue>
+                  </array>
+               </map>
+               <atomicValue key="'minItems'" type="numeric">1</atomicValue>
+               <atomicValue key="'type'" type="string">'array'</atomicValue>
+               <atomicValue key="'description'" type="string">'The xsl:param values for the XSLT'</atomicValue>
+            </map>
+            <map key="'saxonJar'">
+               <atomicValue key="'type'" type="string">'string'</atomicValue>
+               <atomicValue key="'description'" type="string">'`Path of the installed Saxon jar file'</atomicValue>
+            </map>
+            <map key="'classPathEntries'">
+               <map key="'items'">
+                  <atomicValue key="'type'" type="string">'string'</atomicValue>
+               </map>
+               <atomicValue key="'minItems'" type="numeric">1</atomicValue>
+               <atomicValue key="'type'" type="string">'array'</atomicValue>
+               <atomicValue key="'description'" type="string">'Add Java extension libraries to the classpath'</atomicValue>
+            </map>
+            <map key="'dtd'">
+               <array key="'enum'">
+                  <atomicValue type="string">'on'</atomicValue>
+                  <atomicValue type="string">'off'</atomicValue>
+               </array>
+               <atomicValue key="'type'" type="string">'string'</atomicValue>
+               <atomicValue key="'description'" type="string">'Requests DTD-based validation of the source file and of any files read using the document() function'</atomicValue>
+            </map>
+            <map key="'label'">
+               <atomicValue key="'type'" type="string">'string'</atomicValue>
+               <atomicValue key="'description'" type="string">'The user interface label. Change this to uniquely identify the task'</atomicValue>
+            </map>
+            <map key="'enableAssertions'">
+               <array key="'enum'">
+                  <atomicValue type="string">'on'</atomicValue>
+                  <atomicValue type="string">'off'</atomicValue>
+                  <atomicValue type="string">'recover'</atomicValue>
+               </array>
+               <array key="'type'">
+                  <atomicValue type="string">'string'</atomicValue>
+               </array>
+               <atomicValue key="'description'" type="string">'Enables assertions both at compile time and at run time'</atomicValue>
+            </map>
+            <map key="'allowSyntaxExtensions40'">
+               <array key="'enum'">
+                  <atomicValue type="string">'on'</atomicValue>
+                  <atomicValue type="string">'off'</atomicValue>
+               </array>
+               <array key="'type'">
+                  <atomicValue type="string">'string'</atomicValue>
+               </array>
+               <atomicValue key="'description'" type="string">'Enables experimental XPath 4.0 extensions. See: https://www.saxonica.com/documentation11/index.html#!v4extensions'</atomicValue>
+            </map>
+            <map key="'expandValues'">
+               <array key="'enum'">
+                  <atomicValue type="string">'on'</atomicValue>
+                  <atomicValue type="string">'off'</atomicValue>
+               </array>
+               <atomicValue key="'type'" type="string">'string'</atomicValue>
+               <atomicValue key="'description'" type="string">'Specifying 'off' suppresses expansion of DTD/Schema fixed or default values'</atomicValue>
+            </map>
+            <map key="'features'">
+               <map key="'items'">
+                  <map key="'properties'">
+                     <map key="'name'">
+                        <atomicValue key="'type'" type="string">'string'</atomicValue>
+                        <atomicValue key="'description'" type="string">'The feature name - the last part of the Configuration name after the '/' char (name may have a uri suffix). E.g. for 'http://saxon.sf.net/feature/parserFeature?uri=' enter  'parserFeature?uri=''</atomicValue>
+                     </map>
+                     <map key="'value'">
+                        <atomicValue key="'type'" type="string">'string'</atomicValue>
+                        <atomicValue key="'description'" type="string">'The value for the given feature'</atomicValue>
+                     </map>
+                  </map>
+                  <atomicValue key="'type'" type="string">'object'</atomicValue>
+                  <array key="'required'">
+                     <atomicValue type="string">'name'</atomicValue>
+                     <atomicValue type="string">'value'</atomicValue>
+                  </array>
+               </map>
+               <atomicValue key="'minItems'" type="numeric">1</atomicValue>
+               <atomicValue key="'type'" type="string">'array'</atomicValue>
+               <atomicValue key="'description'" type="string">'Set a feature defined in the Saxon Configuration interface. See https://www.saxonica.com/documentation11/index.html#!configuration/config-features'</atomicValue>
+            </map>
+            <map key="'group'">
+               <map key="'properties'">
+                  <map key="'kind'">
+                     <atomicValue key="'type'" type="string">'string'</atomicValue>
+                     <atomicValue key="'description'" type="string">'The kind of task. E.g. 'build''</atomicValue>
+                  </map>
+               </map>
+               <atomicValue key="'type'" type="string">'object'</atomicValue>
+            </map>
          </map>
-         <atomicValue key="'date'">2023-01-28Z</atomicValue>
-         <atomicValue key="'end'" type="string">'paris &amp; london'</atomicValue>
+         <array key="'languages'">
+            <map>
+               <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
+               <array key="'extensions'">
+                  <atomicValue type="string">'.xpath'</atomicValue>
+               </array>
+               <atomicValue key="'pos'" type="numeric">1789</atomicValue>
+               <atomicValue key="'id'" type="string">'xpath'</atomicValue>
+               <array key="'aliases'">
+                  <atomicValue type="string">'XPath'</atomicValue>
+                  <atomicValue type="string">'xpath'</atomicValue>
+               </array>
+            </map>
+            <map>
+               <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
+               <array key="'extensions'">
+                  <atomicValue type="string">'.xsl'</atomicValue>
+                  <atomicValue type="string">'.xslt'</atomicValue>
+               </array>
+               <atomicValue key="'pos'" type="numeric">189</atomicValue>
+               <atomicValue key="'id'" type="string">'xslt'</atomicValue>
+               <array key="'aliases'">
+                  <atomicValue type="string">'XSLT'</atomicValue>
+                  <atomicValue type="string">'xslt'</atomicValue>
+               </array>
+            </map>
+            <map>
+               <atomicValue key="'enabled'" type="boolean">false()</atomicValue>
+               <array key="'extensions'">
+                  <atomicValue type="string">'.dcp'</atomicValue>
+               </array>
+               <atomicValue key="'pos'" type="numeric">2288</atomicValue>
+               <atomicValue key="'id'" type="string">'dcp'</atomicValue>
+               <array key="'aliases'">
+                  <atomicValue type="string">'DCP'</atomicValue>
+                  <atomicValue type="string">'dcp'</atomicValue>
+               </array>
+            </map>
+            <map>
+               <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
+               <array key="'extensions'">
+                  <atomicValue type="string">'.sch'</atomicValue>
+               </array>
+               <atomicValue key="'pos'" type="numeric">7766</atomicValue>
+               <atomicValue key="'id'" type="string">'sch'</atomicValue>
+               <array key="'aliases'">
+                  <atomicValue type="string">'Schematron'</atomicValue>
+                  <atomicValue type="string">'sch'</atomicValue>
+               </array>
+            </map>
+            <map>
+               <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
+               <array key="'extensions'">
+                  <atomicValue type="string">'.xpath'</atomicValue>
+               </array>
+               <atomicValue key="'pos'" type="numeric">1789</atomicValue>
+               <atomicValue key="'id'" type="string">'xpath'</atomicValue>
+               <array key="'aliases'">
+                  <atomicValue type="string">'XPath'</atomicValue>
+                  <atomicValue type="string">'xpath'</atomicValue>
+               </array>
+            </map>
+            <map>
+               <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
+               <array key="'extensions'">
+                  <atomicValue type="string">'.xsl'</atomicValue>
+                  <atomicValue type="string">'.xslt'</atomicValue>
+               </array>
+               <atomicValue key="'pos'" type="numeric">189</atomicValue>
+               <atomicValue key="'id'" type="string">'xslt'</atomicValue>
+               <array key="'aliases'">
+                  <atomicValue type="string">'XSLT'</atomicValue>
+                  <atomicValue type="string">'xslt'</atomicValue>
+               </array>
+            </map>
+            <map>
+               <atomicValue key="'enabled'" type="boolean">false()</atomicValue>
+               <array key="'extensions'">
+                  <atomicValue type="string">'.dcp'</atomicValue>
+               </array>
+               <atomicValue key="'pos'" type="numeric">2288</atomicValue>
+               <atomicValue key="'id'" type="string">'dcp'</atomicValue>
+               <array key="'aliases'">
+                  <atomicValue type="string">'DCP'</atomicValue>
+                  <atomicValue type="string">'dcp'</atomicValue>
+               </array>
+            </map>
+            <map>
+               <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
+               <array key="'extensions'">
+                  <atomicValue type="string">'.sch'</atomicValue>
+               </array>
+               <atomicValue key="'pos'" type="numeric">7766</atomicValue>
+               <atomicValue key="'id'" type="string">'sch'</atomicValue>
+               <array key="'aliases'">
+                  <atomicValue type="string">'Schematron'</atomicValue>
+                  <atomicValue type="string">'sch'</atomicValue>
+               </array>
+            </map>
+         </array>
       </map>
    </result>
 </colors>

@@ -1,0 +1,227 @@
+{
+  "languages": [
+    {
+      "id": "xpath",
+      "pos": 1789,
+      "enabled": true,
+      "aliases": [
+        "XPath",
+        "xpath"
+      ],
+      "extensions": [
+        ".xpath"
+      ]
+    },
+    {
+      "id": "xslt",
+      "pos": 189,
+      "enabled": true,
+      "aliases": [
+        "XSLT",
+        "xslt"
+      ],
+      "extensions": [
+        ".xsl",
+        ".xslt"
+      ]
+    },
+    {
+      "id": "dcp",
+      "pos": 2288,
+      "enabled": false,
+      "aliases": [
+        "DCP",
+        "dcp"
+      ],
+      "extensions": [
+        ".dcp"
+      ]
+    },
+    {
+      "id": "sch",
+      "pos": 7766,
+      "enabled": true,
+      "aliases": [
+        "Schematron",
+        "sch"
+      ],
+      "extensions": [
+        ".sch"
+      ]
+    },
+    {
+      "id": "xpath",
+      "pos": 1789,
+      "enabled": true,
+      "aliases": [
+        "XPath",
+        "xpath"
+      ],
+      "extensions": [
+        ".xpath"
+      ]
+    },
+    {
+      "id": "xslt",
+      "pos": 189,
+      "enabled": true,
+      "aliases": [
+        "XSLT",
+        "xslt"
+      ],
+      "extensions": [
+        ".xsl",
+        ".xslt"
+      ]
+    },
+    {
+      "id": "dcp",
+      "pos": 2288,
+      "enabled": false,
+      "aliases": [
+        "DCP",
+        "dcp"
+      ],
+      "extensions": [
+        ".dcp"
+      ]
+    },
+    {
+      "id": "sch",
+      "pos": 7766,
+      "enabled": true,
+      "aliases": [
+        "Schematron",
+        "sch"
+      ],
+      "extensions": [
+        ".sch"
+      ]
+    }
+  ],
+  "properties": {
+    "label": {
+      "type": "string",
+      "description": "The user interface label. Change this to uniquely identify the task"
+    },
+    "saxonJar": {
+      "type": "string",
+      "description": "`Path of the installed Saxon jar file"
+    },
+    "dtd": {
+      "type": "string",
+      "enum": [
+        "on",
+        "off"
+      ],
+      "description": "Requests DTD-based validation of the source file and of any files read using the document() function"
+    },
+    "enableAssertions": {
+      "type": [
+        "string"
+      ],
+      "enum": [
+        "on",
+        "off",
+        "recover"
+      ],
+      "description": "Enables assertions both at compile time and at run time"
+    },
+    "allowSyntaxExtensions40": {
+      "type": [
+        "string"
+      ],
+      "enum": [
+        "on",
+        "off"
+      ],
+      "description": "Enables experimental XPath 4.0 extensions. See: https://www.saxonica.com/documentation11/index.html#!v4extensions"
+    },
+    "expandValues": {
+      "type": "string",
+      "enum": [
+        "on",
+        "off"
+      ],
+      "description": "Specifying 'off' suppresses expansion of DTD/Schema fixed or default values"
+    },
+    "timing": {
+      "type": "string",
+      "enum": [
+        "on",
+        "off"
+      ],
+      "description": "Display version and timing information to the standard error output"
+    },
+    "messageEscaping": {
+      "type": "string",
+      "enum": [
+        "on",
+        "off"
+      ],
+      "description": "Set to 'off' to disable escaping of XML characters in xsl:message output (not available in Saxon 11.1+ versions)"
+    },
+    "parameters": {
+      "description": "The xsl:param values for the XSLT",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The xsl:param name. Namespaced params can be written as {uri}localname"
+          },
+          "value": {
+            "type": "string",
+            "description": "The xsl:param value. Special leading characters are: '?' (XPath), '!' (xsl:output), '+' (filename): See: http://www.saxonica.com/documentation/index.html#!using-xsl/commandline"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      },
+      "minItems": 1
+    },
+    "features": {
+      "description": "Set a feature defined in the Saxon Configuration interface. See https://www.saxonica.com/documentation11/index.html#!configuration/config-features",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The feature name - the last part of the Configuration name after the '/' char (name may have a uri suffix). E.g. for 'http://saxon.sf.net/feature/parserFeature?uri=' enter  'parserFeature?uri='"
+          },
+          "value": {
+            "type": "string",
+            "description": "The value for the given feature"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      },
+      "minItems": 1
+    },
+    "classPathEntries": {
+      "description": "Add Java extension libraries to the classpath",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of task. E.g. 'build'"
+        }
+      }
+    }
+  }
+
+}

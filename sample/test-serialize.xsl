@@ -14,24 +14,34 @@
   <xsl:import href="../src/xpath-result-serializer.xsl"/>
   
   <xsl:template match="/*" mode="#all">
-    <xsl:variable name="children" as="element()*" select="*"/>
-    <xsl:variable name="id" as="xs:integer" select="1789"/>
+
     <xsl:copy>
-      <xsl:variable name="val" as="map(*)" 
-        select="map {
-            'start': map {
-              $id: $children
-            },
-            'end' : 'paris &amp; london',
-            'date': current-date()
-          }"/>
-      <xsl:message select="ext:describe($val)"/>
-      <xsl:message select="'------------------'"/>
-      <xsl:message select="serialize($val, map{'method':'adaptive'})"/>
+      <xsl:variable name="text" as="xs:string" select="unparsed-text('data.json')"/>
+      <xsl:variable name="jsonObject" as="map(*)" select="parse-json($text)"/>
+      <xsl:variable name="langItems" as="array(*)" select="$jsonObject?languages"/>
+      
+      <xsl:message expand-text="yes">
+        ==== Root element ====
+        languages-count:  {array:size($langItems) => ext:println()}
+      </xsl:message>
+      <xsl:variable name="itemSequence" as="map(*)*" 
+        select="array:flatten($langItems)"/>
+      
+      <xsl:for-each select="$itemSequence">
+        <xsl:message>
+          position:       {ext:print(position())}
+          id:             {ext:print(?id)}
+          aliases:        {ext:print(?aliases)}
+          remaining:
+          {ext:print(map:remove(., ('aliases', 'id')))}
+        </xsl:message>
+      </xsl:for-each>
+      
       <result>
-        <xsl:sequence select="ext:buildResultTree($val)"/> 
+        <xsl:sequence select="ext:buildResultTree($jsonObject)"/> 
       </result>
     </xsl:copy>
+    
   </xsl:template>
   
   
