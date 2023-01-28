@@ -18,10 +18,27 @@
        5. Nodes are represented by XPath locations - namespace-prefixes are used in the location if declared on the context root element
   -->
   
+  <xsl:variable name="product-version-parts" static="yes" as="xs:string+" 
+    select="system-property('Q{http://www.w3.org/1999/XSL/Transform}product-version') => tokenize('\s+')"/>
+  <xsl:variable name="saxon-major-minor-patch" static="yes" as="xs:string*" select="$product-version-parts[2] => tokenize('\.')"/>
+  <xsl:variable name="major" static="yes" as="xs:integer" select="$saxon-major-minor-patch[1] => xs:integer()"/>
+  <xsl:variable name="minor" static="yes" as="xs:integer" select="$saxon-major-minor-patch[2] => xs:integer()"/>
+  <xsl:variable name="patch" static="yes" as="xs:integer" select="$saxon-major-minor-patch[3] => xs:integer()"/>
+  <xsl:variable name="patch-version" static="yes" as="xs:integer" select="$saxon-major-minor-patch[4] => xs:integer()"/>
+  <xsl:variable name="useColors" static="yes" as="xs:boolean" 
+    select="$major le 9 and $minor le 8 or ($major eq 9 and $minor eq 9 and $patch eq 0 and $patch-version le 1)"/>
+  <xsl:variable name="colorDataName" static="yes" as="xs:string" 
+    select="if ($useColors) then 'color-data.xsl' else 'color-data-empty.xsl'"/>
+  
+  <xsl:include _href="{$colorDataName}"/>
+  
   <xsl:variable name="xmlnsMap" as="map(*)" select="ext:getURItoPrefixMap(/*)"/>
   
   <xsl:function name="ext:serializeXPathResult" as="item()*">
-    <xsl:param name="xdmValue" as="item()*"/>     
+    <xsl:param name="xdmValue" as="item()*"/>
+    <xsl:message select="'saxon-versions', $saxon-major-minor-patch => string-join(', ')"/>
+    <xsl:message select="'useColors', $useColors"/>
+    <xsl:message select="'color-data', $COLOR"/>
     <xsl:variable name="enclosedItems" as="element()" select="ext:buildResultTree($xdmValue)"/>
     <xsl:sequence select="ext:xml-to-xdm($enclosedItems)"/>
   </xsl:function>
@@ -171,7 +188,7 @@
     
     <xsl:variable name="parts" as="xs:string*">
       <xsl:for-each select="$c.x">
-        <xsl:variable name="key" as="xs:string" select="if (@key) then '&#x1B;[0;31m' || @key || '&#x1B;[0m' || ':' else ''"/>        
+        <xsl:variable name="key" as="xs:string" select="if (@key) then $RED || @key || $RESET || ':' else ''"/>        
         <xsl:choose>
           <xsl:when test="self::sequence">
             <xsl:sequence select="$key || '(' || ext:writeEnclosedItem(node()) => string-join(',') || ')'"/>
