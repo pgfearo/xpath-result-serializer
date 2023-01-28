@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:array="http://www.w3.org/2005/xpath-functions/array"
@@ -171,7 +171,7 @@
     
     <xsl:variable name="parts" as="xs:string*">
       <xsl:for-each select="$c.x">
-        <xsl:variable name="key" as="xs:string" select="if (@key) then @key || ':' else ''"/>        
+        <xsl:variable name="key" as="xs:string" select="if (@key) then '&#x1B;[0;31m' || @key || '&#x1B;[0m' || ':' else ''"/>        
         <xsl:choose>
           <xsl:when test="self::sequence">
             <xsl:sequence select="$key || '(' || ext:writeEnclosedItem(node()) => string-join(',') || ')'"/>

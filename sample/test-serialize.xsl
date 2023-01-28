@@ -26,6 +26,8 @@
             'date': current-date()
           }"/>
       <xsl:message select="ext:serializeXPathResult($val)"/>
+      <xsl:message select="'------------------'"/>
+      <xsl:message select="serialize($val, map{'method':'adaptive'})"/>
       <result>
         <xsl:sequence select="ext:buildResultTree($val)"/> 
       </result>
