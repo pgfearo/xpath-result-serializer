@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:array="http://www.w3.org/2005/xpath-functions/array"
@@ -40,7 +40,7 @@
     <xsl:message select="'useColors', $useColors"/>
     <xsl:message select="'color-data', $COLOR"/>
     <xsl:variable name="enclosedItems" as="element()" select="ext:buildResultTree($xdmValue)"/>
-    <xsl:sequence select="ext:xml-to-xdm($enclosedItems)"/>
+    <xsl:sequence select="ext:xml-to-xdm($enclosedItems) || $LF"/>
   </xsl:function>
   
   <xsl:function name="ext:getURItoPrefixMap" as="map(xs:anyURI, xs:string)">
