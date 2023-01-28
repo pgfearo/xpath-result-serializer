@@ -10,7 +10,7 @@
             </sequence>
          </map>
          <atomicValue key="'date'">2023-01-28Z</atomicValue>
-         <atomicValue key="'end'">'paris &amp; london'</atomicValue>
+         <atomicValue key="'end'" type="string">'paris &amp; london'</atomicValue>
       </map>
    </result>
 </colors>

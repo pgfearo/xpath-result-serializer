@@ -168,8 +168,9 @@
           </xsl:if>
           <xsl:variable name="val" select="serialize(., map {'method': 'text'})"/>
           <xsl:choose>
-            <xsl:when test=". instance of xs:boolean">{$val}()</xsl:when>
-            <xsl:when test=". instance of xs:string">'{$val}'</xsl:when>
+            <xsl:when test=". instance of xs:boolean"><xsl:attribute name="type" select="'boolean'"/> {$val}()</xsl:when>
+            <xsl:when test=". instance of xs:string"><xsl:attribute name="type" select="'string'"/>'{$val}'</xsl:when>
+            <xsl:when test=". instance of xs:numeric"><xsl:attribute name="type" select="'numeric'"/>'{$val}'</xsl:when>
             <xsl:otherwise>{$val}</xsl:otherwise>
           </xsl:choose>         
         </atomicValue>       

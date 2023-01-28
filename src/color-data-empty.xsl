@@ -5,8 +5,6 @@
     
     <xsl:variable name="LF" as="xs:string" select="'&#10;'"/>
     <xsl:variable name="RESET" as="xs:string" select="''"/>
-    RESET("\033[0m"),
-
     
     <xsl:variable name="BLACK" as="xs:string" select="''"/>
     <xsl:variable name="RED" as="xs:string" select="''"/>
