@@ -35,7 +35,7 @@
   
   <xsl:variable name="xmlnsMap" as="map(*)" select="ext:getURItoPrefixMap(/*)"/>
   
-  <xsl:function name="ext:serializeXPathResult" as="item()*">
+  <xsl:function name="ext:describe" as="item()*">
     <xsl:param name="xdmValue" as="item()*"/>
     <!-- <xsl:message select="'saxon-versions', $saxon-major-minor-patch => string-join(', ')"/>
          <xsl:message select="'useColors', $useColors"/> 

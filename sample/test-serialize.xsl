@@ -25,7 +25,7 @@
             'end' : 'paris &amp; london',
             'date': current-date()
           }"/>
-      <xsl:message select="ext:serializeXPathResult($val)"/>
+      <xsl:message select="ext:describe($val)"/>
       <xsl:message select="'------------------'"/>
       <xsl:message select="serialize($val, map{'method':'adaptive'})"/>
       <result>
