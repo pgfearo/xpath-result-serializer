@@ -22,12 +22,12 @@
     select="system-property('Q{http://www.w3.org/1999/XSL/Transform}product-version') => tokenize('\s+')"/>
   <xsl:variable name="saxon-major-minor-patch" static="yes" as="xs:string*" select="$product-version-parts[2] => tokenize('\.')"/>
   <xsl:variable name="major" static="yes" as="xs:integer" select="$saxon-major-minor-patch[1] => xs:integer()"/>
-  <xsl:variable name="minor" static="yes" as="xs:integer" select="$saxon-major-minor-patch[2] => xs:integer()"/>
-  <xsl:variable name="patch" static="yes" as="xs:integer" select="$saxon-major-minor-patch[3] => xs:integer()"/>
-  <xsl:variable name="patch-version" static="yes" as="xs:integer" select="$saxon-major-minor-patch[4] => xs:integer()"/>
+  <xsl:variable name="minor" static="yes" as="xs:integer" select="($saxon-major-minor-patch[2] => xs:integer(), 0)[1]"/>
+  <xsl:variable name="patch" static="yes" as="xs:integer" select="($saxon-major-minor-patch[3] => xs:integer(), 0)[1]"/>
+  <xsl:variable name="patch-version" static="yes" as="xs:integer" select="($saxon-major-minor-patch[4] => xs:integer(), 0)[1]"/>
   <!-- Only Saxon 9.9.0.1 and previous versions can use ANSI escape sequences for colors: -->
   <xsl:variable name="useColors" static="yes" as="xs:boolean" 
-    select="$major le 9 and $minor le 8 or ($major eq 9 and $minor eq 9 and $patch eq 0 and $patch-version le 1)"/>
+    select="($major lt 8) or ($major eq 9 and $minor lt 9) or ($major eq 9 and $minor eq 9 and $patch eq 0 and $patch-version le 1)"/>
   <xsl:variable name="colorDataName" static="yes" as="xs:string" 
     select="if ($useColors) then 'color-data.xsl' else 'color-data-empty.xsl'"/>
   

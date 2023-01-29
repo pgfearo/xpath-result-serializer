@@ -31,7 +31,7 @@
         <xsl:message>
           position:       {ext:print(position())}
           id:             {ext:print(?id)}
-          aliases:        {ext:print(?aliases)}
+          aliases:        {ext:print(?aliases) => serialize(map {'method': 'adaptive'})}
           remaining:
           {ext:print(map:remove(., ('aliases', 'id')))}
         </xsl:message>
