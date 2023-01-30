@@ -41,8 +41,5 @@
       </result>
     </xsl:copy>
     
-  </xsl:template>
-  
-  
-  
+  </xsl:template> 
 </xsl:stylesheet>
