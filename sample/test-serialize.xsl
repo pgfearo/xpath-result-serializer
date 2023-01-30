@@ -33,12 +33,10 @@
           position:       {ext:print($i)}
           colorElement:   {ext:print($e/*, 12, '  ')}
           language:       {ext:print(., 12, '  ')}
-          empty:          {()}
         </xsl:message>
       </xsl:for-each>
       
       <result>
-        <xsl:sequence select="ext:buildResultTree(*)"/>
         <xsl:sequence select="ext:buildResultTree(map:remove($itemSequence[1], ('aliases', 'id')))"/> 
       </result>
     </xsl:copy>
