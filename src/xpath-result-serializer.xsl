@@ -149,6 +149,7 @@
           <xsl:if test="$key">
             <xsl:attribute name="key" select="$key"/>
           </xsl:if>
+          <xsl:attribute name="text" select="ext:formatValue(., 18)"/>
           <xsl:sequence select="ext:tidyXPath(.)"/>
         </path>
       </xsl:when>
@@ -189,6 +190,20 @@
     </xsl:choose>
   </xsl:template>
   
+  <xsl:function name="ext:formatValue" as="item()*">
+    <xsl:param name="c.x" as="item()*"/>
+    <xsl:param name="maxLength" as="xs:integer"/>
+    <xsl:variable name="ellipsis" as="xs:string" select="'...'"/>
+    <xsl:variable name="max" as="xs:integer" select="$maxLength - string-length($ellipsis)"/>
+    <xsl:sequence select="
+      let $nt := normalize-space($c.x),
+        $t := substring($nt, 1, $max),
+        $addDots := string-length($nt) gt $max,
+        $tdiff := $maxLength - string-length($t),
+        $append := if ($addDots) then '...' else string-join(for $x in 1 to $tdiff return ' ', '')
+      return $t || $append"/>
+  </xsl:function>
+  
   <xsl:function name="ext:xml-to-xdm" as="xs:string">
     <xsl:param name="top" as="element()"/>
     <xsl:param name="level" as="xs:integer"/>
@@ -220,7 +235,7 @@
             <xsl:sequence select="$key || '{' || ext:recurseForChildren(., $level, $spaceChars) || '}'"/>
           </xsl:when>
           <xsl:when test="self::path">
-            <xsl:value-of select="$key || $YELLOW || node() || $RESET"/>
+            <xsl:value-of select="$key || $BLUE || @text || $YELLOW || node() || $RESET"/>
           </xsl:when>
           <xsl:when test="self::atomicValue">
             <xsl:variable name="color" as="xs:string" 

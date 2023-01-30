@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <colors>
    <result>
+      <sequence>
+         <path text="crimson color i...">/colors[1]/red[1]</path>
+         <path text="the green grass   ">/colors[1]/green[1]</path>
+         <path text="blue sea          ">/colors[1]/blue[1]</path>
+      </sequence>
       <map>
          <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
          <array key="'extensions'">
