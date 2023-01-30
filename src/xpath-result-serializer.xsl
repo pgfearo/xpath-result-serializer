@@ -203,7 +203,7 @@
     
     <xsl:variable name="indent" as="xs:string" select="string-join(for $n in 1 to $level return $spaceChars, '')"/>
     
-    <xsl:variable name="hasNonAtomicSiblings" as="item()*" select="$c.x/..[array, sequence, map]"/>
+    <xsl:variable name="hasNonAtomicSiblings" as="item()*" select="$c.x/..[array, sequence, map, path]"/>
     <xsl:variable name="nl" as="xs:string" select="if ($hasNonAtomicSiblings) then ('&#10;' || $indent) else ''"/>
     
     <xsl:variable name="parts" as="xs:string*">

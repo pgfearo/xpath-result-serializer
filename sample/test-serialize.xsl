@@ -13,7 +13,7 @@
   <xsl:mode on-no-match="shallow-copy"/>
   <xsl:import href="../src/xpath-result-serializer.xsl"/>
   <xsl:template match="/*" mode="#all">
-    
+    <xsl:variable name="e" as="element()" select="."/>
     <xsl:copy>
       <xsl:variable name="text" as="xs:string" select="unparsed-text('data.json')"/>
       <xsl:variable name="jsonObject" as="map(*)" select="parse-json($text)"/>
@@ -28,8 +28,10 @@
         select="array:flatten($langItems)"/>
       
       <xsl:for-each select="$itemSequence">
+        <xsl:variable name="i" as="xs:integer" select="position()"/>
         <xsl:message>
-          position:       {ext:print(position())}
+          position:       {ext:print($i)}
+          colorElement:   {ext:print($e/*, 12, '  ')}
           language:       {ext:print(., 12, '  ')}
         </xsl:message>
       </xsl:for-each>
