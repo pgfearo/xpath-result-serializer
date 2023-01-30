@@ -42,8 +42,15 @@
   
   <xsl:function name="ext:print" as="xs:string">
     <xsl:param name="xdmValue" as="item()*"/>
+    <xsl:sequence select="ext:print($xdmValue, 0, '')"/>
+  </xsl:function>
+  
+  <xsl:function name="ext:print" as="xs:string">
+    <xsl:param name="xdmValue" as="item()*"/>
+    <xsl:param name="level" as="xs:integer"/>
+    <xsl:param name="spaceChars" as="xs:string"/>
     <xsl:variable name="enclosedItems" as="element()" select="ext:buildResultTree($xdmValue)"/>
-    <xsl:sequence select="ext:xml-to-xdm($enclosedItems)"/>
+    <xsl:sequence select="ext:xml-to-xdm($enclosedItems, $level, $spaceChars)"/>
   </xsl:function>
   
   <xsl:function name="ext:getURItoPrefixMap" as="map(xs:anyURI, xs:string)">
@@ -184,24 +191,33 @@
   
   <xsl:function name="ext:xml-to-xdm" as="xs:string">
     <xsl:param name="top" as="element()"/>
-    <xsl:sequence select="ext:writeEnclosedItem($top) => string-join('')"/>
+    <xsl:param name="level" as="xs:integer"/>
+    <xsl:param name="spaceChars" as="xs:string"/>
+    <xsl:sequence select="ext:writeEnclosedItem($top, $level + 1, $spaceChars) => string-join('')"/>
   </xsl:function>
   
   <xsl:function name="ext:writeEnclosedItem" as="xs:string*">
     <xsl:param name="c.x" as="item()*"/>
+    <xsl:param name="level" as="xs:integer"/>
+    <xsl:param name="spaceChars" as="xs:string"/>
+    
+    <xsl:variable name="indent" as="xs:string" select="string-join(for $n in 1 to $level return $spaceChars, '')"/>
+    
+    <xsl:variable name="hasNonAtomicSiblings" as="item()*" select="$c.x/..[array, sequence, map]"/>
+    <xsl:variable name="nl" as="xs:string" select="if ($hasNonAtomicSiblings) then ('&#10;' || $indent) else ''"/>
     
     <xsl:variable name="parts" as="xs:string*">
       <xsl:for-each select="$c.x">
-        <xsl:variable name="key" as="xs:string" select="if (@key) then $RED || @key || $RESET || ':' else ''"/>        
+        <xsl:variable name="key" as="xs:string" select="$nl || (if (@key) then $RED || @key || $RESET || ':' else '')"/>        
         <xsl:choose>
           <xsl:when test="self::sequence">
-            <xsl:sequence select="$key || '(' || ext:writeEnclosedItem(node()) => string-join(',') || ')'"/>
+            <xsl:sequence select="$key || '(' || ext:recurseForChildren(., $level, $spaceChars) || ')'"/>
           </xsl:when>
           <xsl:when test="self::array">
-            <xsl:sequence select="$key || '[' || ext:writeEnclosedItem(node()) => string-join(',') || ']'"/>
+            <xsl:sequence select="$key || '[' || ext:recurseForChildren(., $level, $spaceChars) || ']'"/>
           </xsl:when>
           <xsl:when test="self::map">
-            <xsl:sequence select="$key || '{' || ext:writeEnclosedItem(node()) => string-join(',') || '}'"/>
+            <xsl:sequence select="$key || '{' || ext:recurseForChildren(., $level, $spaceChars) || '}'"/>
           </xsl:when>
           <xsl:when test="self::path">
             <xsl:value-of select="$key || $YELLOW || node() || $RESET"/>
@@ -218,6 +234,16 @@
       </xsl:for-each>
     </xsl:variable>
     <xsl:sequence select="$parts"/>    
+  </xsl:function>
+  
+  <xsl:function name="ext:recurseForChildren" as="item()*">
+    <xsl:param name="c.x" as="item()*"/>
+    <xsl:param name="level" as="xs:integer"/>
+    <xsl:param name="spaceChars" as="xs:string"/>
+    
+    
+    <xsl:sequence select="
+      ext:writeEnclosedItem($c.x/node(), $level + 1, $spaceChars) => string-join(',')"/>
   </xsl:function>
   
 </xsl:stylesheet>
