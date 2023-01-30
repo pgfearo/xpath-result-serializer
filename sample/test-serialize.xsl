@@ -4,7 +4,7 @@
                 xmlns:array="http://www.w3.org/2005/xpath-functions/array"
                 xmlns:map="http://www.w3.org/2005/xpath-functions/map"
                 xmlns:math="http://www.w3.org/2005/xpath-functions/math"
-                xmlns:ext="xpath.result.to.json"
+                xmlns:ext="com.deltaxml.xpath.result.print"
                 exclude-result-prefixes="#all"
                 expand-text="yes"
                 version="3.0">
@@ -12,9 +12,8 @@
   <xsl:output method="xml" indent="yes"/>
   <xsl:mode on-no-match="shallow-copy"/>
   <xsl:import href="../src/xpath-result-serializer.xsl"/>
-  
   <xsl:template match="/*" mode="#all">
-
+    
     <xsl:copy>
       <xsl:variable name="text" as="xs:string" select="unparsed-text('data.json')"/>
       <xsl:variable name="jsonObject" as="map(*)" select="parse-json($text)"/>
