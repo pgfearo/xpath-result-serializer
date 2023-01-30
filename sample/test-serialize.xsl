@@ -29,19 +29,9 @@
       <xsl:for-each select="$itemSequence">
         <xsl:message>
           position:       {ext:print(position())}
-          remaining:      {ext:print(., 12, '  ')}
+          language:       {ext:print(., 12, '  ')}
         </xsl:message>
       </xsl:for-each>
-      
-      <!-- <xsl:for-each select="$itemSequence">
-           <xsl:message>
-           position:       {ext:print(position())}
-          id:             {ext:print(?id)}
-          aliases:        {ext:print(?aliases) => serialize(map {'method': 'adaptive'})}
-          remaining:
-          {ext:print(map:remove(., ('aliases', 'id')))}
-        </xsl:message>
-           </xsl:for-each> -->
       
       <result>
         <xsl:sequence select="ext:buildResultTree(map:remove($itemSequence[1], ('aliases', 'id')))"/> 
