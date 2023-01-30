@@ -21,7 +21,8 @@
       
       <xsl:message expand-text="yes">
         ==== Root element ====
-        languages-count:  {array:size($langItems) => ext:println()}
+        languages-count:  {array:size($langItems) => ext:print()}
+        context:          {ext:print(., 10, '  ')}
       </xsl:message>
       <xsl:variable name="itemSequence" as="map(*)*" 
         select="array:flatten($langItems)"/>

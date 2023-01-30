@@ -31,7 +31,11 @@
       "enabled": false,
       "aliases": [
         "DCP",
-        "dcp"
+        [
+          "dcp",
+          "dcp1",
+          "dcp2"
+        ]
       ],
       "extensions": [
         ".dcp"
