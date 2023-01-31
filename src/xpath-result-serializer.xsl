@@ -146,9 +146,20 @@
           <xsl:if test="$key">
             <xsl:attribute name="key" select="$key"/>
           </xsl:if>
-          <xsl:attribute name="text" select="ext:formatValue(., 18)"/>
+          <xsl:attribute name="text" select="if ($nodeType eq 'element') then (if (has-children()) then ext:formatValue(., 18) else ext:formatValue('[empty-element]', 18)) else ext:formatValue(., 18)"/>
           <xsl:attribute name="type" select="$nodeType"/>
-          <xsl:sequence select="ext:tidyXPath(.)"/>
+          <xsl:variable name="location" select="ext:tidyXPath(.)"/>
+          <xsl:choose>
+            <xsl:when test="$location eq 'root()'">
+              <xsl:variable name="selfClose" as="xs:string" select="if (has-children()) then '' else '/'"/>
+              <xsl:variable name="startTag" select="'&lt;' || name() || ' ' || string-join(for $a in @* return name($a) || '=&quot;' || $a || '&quot;', ' ') || $selfClose || '&gt;'"/>
+              <xsl:variable name="endTag" select="'/&lt;' || name() || '&gt;'"/>
+              <xsl:sequence select="if (has-children()) then $startTag || '...' || $endTag else $startTag"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:sequence select="$location"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </path>
       </xsl:when>
       
