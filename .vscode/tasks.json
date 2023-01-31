@@ -18,6 +18,24 @@
 			"problemMatcher": [
 				"$saxon-xslt"
 			]
+		},
+		{
+			"type": "xslt",
+			"label": "again",
+			"saxonJar": "${config:XSLT.tasks.saxonJar}",
+			"xsltFile": "${workspaceFolder}/sample/again.xsl",
+			"xmlSource": "${workspaceFolder}/sample/data.xml",
+			"resultPath": "${workspaceFolder}/sample/result/data-out2.xml",
+			"allowSyntaxExtensions40": "off",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			// WARNING: Error occurs with Saxon 9.9.0.2+ with messageEscaping: "off"
+			"messageEscaping": "adaptive",
+			"problemMatcher": [
+				"$saxon-xslt"
+			]
 		}
 	]
 }

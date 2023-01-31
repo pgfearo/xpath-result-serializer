@@ -1,5 +1,7 @@
 <colors>
-  <red>crimson color is popular</red>
-  <green>the green grass</green>
-  <blue>blue sea</blue>
+  <red class="red01">crimson color is popular</red>
+  <!-- colors -->
+  <?color id="10897"?>
+  <green class="green02">the green grass</green>
+  <blue class="blue03">blue sea</blue>
 </colors>
