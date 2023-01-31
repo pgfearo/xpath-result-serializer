@@ -10,32 +10,26 @@
   <xsl:output method="xml" indent="yes"/>
   <xsl:mode on-no-match="shallow-copy"/>
   <xsl:import href="../src/xpath-result-serializer.xsl"/>
+  
   <xsl:template match="/*" mode="#all">
-    <xsl:copy>
-      <xsl:variable name="text" as="xs:string" select="unparsed-text('data.json')"/>
-      <xsl:variable name="jsonObject" as="map(*)" select="parse-json($text)"/>
-      <xsl:variable name="langItems" as="array(*)" select="$jsonObject?languages"/>
+    <xsl:variable name="text" as="xs:string" select="unparsed-text('data.json')"/>
+    <xsl:variable name="jsonObject" as="map(*)" select="parse-json($text)"/>
+    <xsl:variable name="langItems" as="array(*)" select="$jsonObject?languages"/>
+    <xsl:message expand-text="yes">
+      ==== Root element ====
+      languages-count:  {node-name() => ext:print(9,'  ')}
+      colorNodes:  {ext:print((*,*/@*),9,'  ')}
       
+    </xsl:message>
+    <xsl:copy>    
       <xsl:message expand-text="yes">
-        ==== Root element ====
-        languages-count:  {array:size($langItems) => ext:print()}
-        context:          {ext:print(., 10, '  ')}
-        colorNodes:     {ext:print((*,*/@*), 10, '  ')}
+        ==== data====
+        context:     {ext:print(.,10,'  ')}
+        language:    {ext:print($langItems,10,'  ')}
       </xsl:message>
-      <xsl:variable name="itemSequence" as="map(*)*" 
-        select="array:flatten($langItems)"/>
-      
-      <xsl:for-each select="$itemSequence">
-        <xsl:variable name="i" as="xs:integer" select="position()"/>
-        <xsl:message>
-          ==== for-each $itemSequence ====
-          position:       {ext:print($i)}
-          language:       {ext:print(., 12, '  ')}
-        </xsl:message>
-      </xsl:for-each>
       
       <result>
-        <xsl:sequence select="ext:buildResultTree(map:remove($itemSequence[1], ('aliases', 'id')))"/> 
+        <xsl:sequence select="ext:buildResultTree($langItems)"/> 
       </result>
     </xsl:copy>
     
