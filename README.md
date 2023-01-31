@@ -21,7 +21,7 @@ Using two XSLT functions, `print()` and `println()`, the result of an XPath expr
 ### Sample xsl:message output
 The xsl:message output to the VS Code terminal using `ext:print()` and `ext:println()`:
 
-![screenshot of xsl:message](sample/colorised-xpath.png)
+<img src="sample/colorised-xpath.png" width="800px">
 
 ## Key Resource Files
 - Source XSLT: `src/xpath-result-serializer.xsl`
