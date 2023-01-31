@@ -31,7 +31,7 @@
         <xsl:variable name="i" as="xs:integer" select="position()"/>
         <xsl:message>
           position:       {ext:print($i)}
-          colorElement:   {ext:print(($e/*,$e/*/@*), 12, '  ')}
+          colorNodes:     {ext:print(($e/*,$e/*/@*), 12, '  ')}
           language:       {ext:print(., 12, '  ')}
         </xsl:message>
       </xsl:for-each>
