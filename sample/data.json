@@ -40,67 +40,6 @@
         ".xsl",
         ".xslt"
       ]
-    },
-    {
-      "id": "sch",
-      "pos": 7766,
-      "enabled": true,
-      "aliases": [
-        "Schematron",
-        "sch"
-      ],
-      "extensions": [
-        ".sch"
-      ]
-    },
-    {
-      "id": "xpath",
-      "pos": 1789,
-      "enabled": true,
-      "aliases": [
-        "XPath",
-        "xpath"
-      ],
-      "extensions": [
-        ".xpath"
-      ]
-    },
-    {
-      "id": "xslt",
-      "pos": 189,
-      "enabled": true,
-      "aliases": [
-        "XSLT",
-        "xslt"
-      ],
-      "extensions": [
-        ".xsl",
-        ".xslt"
-      ]
-    },
-    {
-      "id": "dcp",
-      "pos": 2288,
-      "enabled": false,
-      "aliases": [
-        "DCP",
-        "dcp"
-      ],
-      "extensions": [
-        ".dcp"
-      ]
-    },
-    {
-      "id": "sch",
-      "pos": 7766,
-      "enabled": true,
-      "aliases": [
-        "Schematron",
-        "sch"
-      ],
-      "extensions": [
-        ".sch"
-      ]
     }
   ],
   "properties": {

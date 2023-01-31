@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <colors>
-   <result>
+   <result xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:array="http://www.w3.org/2005/xpath-functions/array"
+           xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+           xmlns:ext="com.deltaxml.xpath.result.print">
       <map>
          <atomicValue key="'enabled'" type="boolean">false()</atomicValue>
          <array key="'extensions'">
