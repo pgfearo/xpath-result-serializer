@@ -20,7 +20,7 @@
         ==== Root element ====
         languages-count:  {array:size($langItems) => ext:print()}
         context:          {ext:print(., 10, '  ')}
-        colorNodes:     {ext:print((*,*/@*), 12, '  ')}
+        colorNodes:     {ext:print((*,*/@*), 10, '  ')}
       </xsl:message>
       <xsl:variable name="itemSequence" as="map(*)*" 
         select="array:flatten($langItems)"/>
