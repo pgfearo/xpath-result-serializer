@@ -1,6 +1,22 @@
 {
   "languages": [
     {
+      "id": "dcp",
+      "pos": 2288,
+      "enabled": false,
+      "aliases": [
+        "DCP",
+        [
+          "dcp",
+          "dcp1",
+          "dcp2"
+        ]
+      ],
+      "extensions": [
+        ".dcp"
+      ]
+    },
+    {
       "id": "xpath",
       "pos": 1789,
       "enabled": true,
@@ -23,22 +39,6 @@
       "extensions": [
         ".xsl",
         ".xslt"
-      ]
-    },
-    {
-      "id": "dcp",
-      "pos": 2288,
-      "enabled": false,
-      "aliases": [
-        "DCP",
-        [
-          "dcp",
-          "dcp1",
-          "dcp2"
-        ]
-      ],
-      "extensions": [
-        ".dcp"
       ]
     },
     {

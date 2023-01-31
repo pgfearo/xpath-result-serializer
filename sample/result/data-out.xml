@@ -2,11 +2,11 @@
 <colors>
    <result>
       <map>
-         <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
+         <atomicValue key="'enabled'" type="boolean">false()</atomicValue>
          <array key="'extensions'">
-            <atomicValue type="string">'.xpath'</atomicValue>
+            <atomicValue type="string">'.dcp'</atomicValue>
          </array>
-         <atomicValue key="'pos'" type="numeric">1789</atomicValue>
+         <atomicValue key="'pos'" type="numeric">2288</atomicValue>
       </map>
    </result>
 </colors>

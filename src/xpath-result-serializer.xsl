@@ -138,7 +138,7 @@
   
   <xsl:template name="encloseItem">
     <xsl:param name="key" as="xs:string?"/>
-    <xsl:variable name="nodeType" as="xs:string" select="ext:nodeType(.)"/>
+    <xsl:variable name="nodeType" as="xs:string?" select="ext:nodeType(.)"/>
     
     <xsl:choose>     
       <xsl:when test="exists($nodeType)">        
@@ -270,6 +270,9 @@
       <xsl:when test="$node instance of comment()">
         <xsl:sequence select="'comment'"/>
       </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="()"/>
+      </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
   
