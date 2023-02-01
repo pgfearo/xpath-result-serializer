@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:array="http://www.w3.org/2005/xpath-functions/array"
+                xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+                xmlns:ext="com.deltaxml.xpath.result.print"
+                expand-text="yes"
+                version="3.0">
+  
+  <xsl:output method="xml" indent="yes"/>
+  <xsl:mode on-no-match="shallow-copy"/>
+  <xsl:import href="../src/xpath-result-serializer.xsl"/>
+  
+  <xsl:template match="/*" mode="#all">
+    <xsl:variable name="text" as="xs:string" select="unparsed-text('data.json')"/>
+    <xsl:variable name="jsonObject" as="map(*)" select="parse-json($text)"/>
+    <xsl:variable name="langItems" as="array(*)" select="$jsonObject?languages"/>
+    <xsl:variable name="newElement" as="element()" select="ext:newElement()"/>
+    <xsl:variable name="newAttribute" as="attribute()" select="ext:newAttribute()"/>
+    <xsl:variable name="newText" as="text()" select="ext:newText()"/>
+    <xsl:variable name="newComment" as="comment()" select="ext:newComment()"/>
+    <xsl:variable name="newPI" as="processing-instruction()" select="ext:newProcessingInstruction()"/>
+    <xsl:message expand-text="yes">
+      ==== Root element ====
+      languages-count:  {node-name() => ext:print(9,'  ')}
+      colorNodes:  {ext:print((*,*/@*),9,'  ')}
+      
+    </xsl:message>
+    <xsl:copy>    
+      <xsl:message expand-text="yes">
+        ==== data====
+        context:     {ext:print(.,10,'  ')}
+        element:     {ext:print($newElement,12,'  ')}
+        element:     {ext:print($newAttribute,12,'  ')}
+        element:     {ext:print($newText,12,'  ')}
+        element:     {ext:print($newComment,12,'  ')}
+        element:     {ext:print($newPI,12,'  ')}
+        language:    {ext:print($langItems,10,'  ')}
+      </xsl:message>
+      
+      <result>
+        <xsl:sequence select="ext:buildResultTree($langItems)"/> 
+      </result>
+    </xsl:copy>
+    
+  </xsl:template> 
+  
+  <xsl:function name="ext:newElement" as="element()">
+    <test-element id="1839" class="'back 8'"/>
+  </xsl:function>
+  
+  <xsl:function name="ext:newText" as="text()">
+    <xsl:text>The quick brown fox</xsl:text>
+  </xsl:function>
+  
+  <xsl:function name="ext:newComment" as="comment()">
+    <xsl:comment select="'A remarkable day'"/>
+  </xsl:function>
+  
+  <xsl:function name="ext:newProcessingInstruction" as="processing-instruction()">
+    <xsl:processing-instruction name="class" select="'187:198:200'"/>
+  </xsl:function>
+  
+  <xsl:function name="ext:newAttribute" as="attribute()">
+    <xsl:attribute name="test-attribute" select="'82-77-187'"/>
+  </xsl:function>
+</xsl:stylesheet>

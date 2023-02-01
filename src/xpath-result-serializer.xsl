@@ -148,16 +148,20 @@
           </xsl:if>
           <xsl:attribute name="text" select="if ($nodeType eq 'element') then (if (has-children()) then ext:formatValue(., 18) else ext:formatValue('[empty-element]', 18)) else ext:formatValue(., 18)"/>
           <xsl:attribute name="type" select="$nodeType"/>
-          <xsl:variable name="location" select="ext:tidyXPath(.)"/>
+          <xsl:attribute name="location" select="ext:tidyXPath(.)"/>
           <xsl:choose>
-            <xsl:when test="$location eq 'root()'">
-              <xsl:variable name="selfClose" as="xs:string" select="if (has-children()) then '' else '/'"/>
-              <xsl:variable name="startTag" select="'&lt;' || name() || ' ' || string-join(for $a in @* return name($a) || '=&quot;' || $a || '&quot;', ' ') || $selfClose || '&gt;'"/>
-              <xsl:variable name="endTag" select="'/&lt;' || name() || '&gt;'"/>
-              <xsl:sequence select="if (has-children()) then $startTag || '...' || $endTag else $startTag"/>
+            <xsl:when test="$nodeType eq 'element'">
+              <xsl:copy copy-namespaces="false">
+                <xsl:copy-of select="@*"/>
+              </xsl:copy>
+            </xsl:when>
+            <xsl:when test="$nodeType eq 'attribute'">
+              <ext:attribute>
+                <xsl:copy-of select="."/>
+              </ext:attribute>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:sequence select="$location"/>
+              <xsl:copy-of select="."/>
             </xsl:otherwise>
           </xsl:choose>
         </path>
@@ -198,6 +202,38 @@
       
     </xsl:choose>
   </xsl:template>
+  
+  <xsl:function name="ext:explainNode" as="item()*">
+    <xsl:param name="c.x" as="node()?"/>
+    <xsl:param name="location" as="xs:string"/>
+    <xsl:choose>
+      <xsl:when test="$location eq 'root()'">
+        <xsl:choose>
+          <xsl:when test="$c.x[self::ext:attribute]">
+            <xsl:sequence select="name($c.x/@*) || '=&quot;' || $c.x/@* || '&quot;'"/>
+          </xsl:when>
+          <xsl:when test="$c.x instance of element()">
+            <xsl:variable name="selfClose" as="xs:string" select="if (has-children($c.x)) then '' else '/'"/>
+            <xsl:variable name="startTag" select="'&lt;' || name($c.x) || ' ' || string-join(for $a in $c.x/@* return name($a) || '=&quot;' || $a || '&quot;', ' ') || $selfClose || '&gt;'"/>
+            <xsl:variable name="endTag" select="'/&lt;' || name($c.x) || '&gt;'"/>
+            <xsl:sequence select="if (has-children($c.x)) then $startTag || '...' || $endTag else $startTag"/>
+          </xsl:when>
+          <xsl:when test="$c.x instance of text()">
+            <xsl:sequence select="'&quot;' || $c.x || '&quot;'"/>
+          </xsl:when>
+          <xsl:when test="$c.x instance of comment()">
+            <xsl:sequence select="'&lt;!--' || $c.x || '--&gt;'"/>
+          </xsl:when>
+          <xsl:when test="$c.x instance of processing-instruction()">
+            <xsl:sequence select="'&lt;?' || name($c.x) || ' ' || $c.x || ' ?&gt;'"/>            
+          </xsl:when>
+        </xsl:choose>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$location"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
   
   <xsl:function name="ext:formatValue" as="item()*">
     <xsl:param name="c.x" as="item()*"/>
@@ -244,7 +280,7 @@
             <xsl:sequence select="$key || '{' || ext:recurseForChildren(., $level, $spaceChars) || '}'"/>
           </xsl:when>
           <xsl:when test="self::path">
-            <xsl:value-of select="$key || ext:nodeColor(@type) || @text || $YELLOW || node() || $RESET"/>
+            <xsl:value-of select="$key || ext:nodeColor(@type) || @text || $YELLOW || ext:explainNode(node(), @location) || $RESET"/>
           </xsl:when>
           <xsl:when test="self::atomicValue">
             <xsl:variable name="color" as="xs:string" 
