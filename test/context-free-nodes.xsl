@@ -12,7 +12,7 @@
   <xsl:import href="../src/xpath-result-serializer.xsl"/>
   
   <xsl:template match="/*" mode="#all">
-    <xsl:variable name="text" as="xs:string" select="unparsed-text('data.json')"/>
+    <xsl:variable name="text" as="xs:string" select="unparsed-text('../data.json')"/>
     <xsl:variable name="jsonObject" as="map(*)" select="parse-json($text)"/>
     <xsl:variable name="langItems" as="array(*)" select="$jsonObject?languages"/>
     <xsl:variable name="newElement" as="element()" select="ext:newElement()"/>

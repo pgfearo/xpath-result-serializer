@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "xslt",
-			"label": "test xpath-result-serializer",
+			"label": "sample usage of ext:print() function",
 			"saxonJar": "${config:XSLT.tasks.saxonJar}",
 			"xsltFile": "${workspaceFolder}/sample/test-serialize.xsl",
 			"xmlSource": "${workspaceFolder}/sample/data.xml",
@@ -21,9 +21,9 @@
 		},
 		{
 			"type": "xslt",
-			"label": "again",
+			"label": "test",
 			"saxonJar": "${config:XSLT.tasks.saxonJar}",
-			"xsltFile": "${workspaceFolder}/sample/again.xsl",
+			"xsltFile": "${workspaceFolder}/test/context-free-nodes.xsl",
 			"xmlSource": "${workspaceFolder}/sample/data.xml",
 			"resultPath": "${workspaceFolder}/sample/result/data-out2.xml",
 			"allowSyntaxExtensions40": "off",
