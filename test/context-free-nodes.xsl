@@ -12,7 +12,7 @@
   <xsl:import href="../src/xpath-result-serializer.xsl"/>
   
   <xsl:template match="/*" mode="#all">
-    <xsl:variable name="text" as="xs:string" select="unparsed-text('../data.json')"/>
+    <xsl:variable name="text" as="xs:string" select="unparsed-text('../sample/data.json')"/>
     <xsl:variable name="jsonObject" as="map(*)" select="parse-json($text)"/>
     <xsl:variable name="langItems" as="array(*)" select="$jsonObject?languages"/>
     <xsl:variable name="newElement" as="element()" select="ext:newElement()"/>
@@ -29,13 +29,13 @@
     <xsl:copy>    
       <xsl:message expand-text="yes">
         ==== data====
-        context:     {ext:print(.,10,'  ')}
-        element:     {ext:print($newElement,12,'  ')}
-        element:     {ext:print($newAttribute,12,'  ')}
-        element:     {ext:print($newText,12,'  ')}
-        element:     {ext:print($newComment,12,'  ')}
-        element:     {ext:print($newPI,12,'  ')}
-        language:    {ext:print($langItems,10,'  ')}
+        context:      {ext:print(.,10,'  ')}
+        element:      {ext:print($newElement,12,'  ')}
+        attribute:    {ext:print($newAttribute,12,'  ')}
+        newText:      {ext:print($newText,12,'  ')}
+        newComment:   {ext:print($newComment,12,'  ')}
+        newPI:        {ext:print($newPI,12,'  ')}
+        language:     {ext:print($langItems,10,'  ')}
       </xsl:message>
       
       <result>
