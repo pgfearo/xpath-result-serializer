@@ -44,7 +44,7 @@
         newNamespace: {ext:print(ext:newNamespace())}
         newNamespace2:{ext:print(ext:newNamespace2())}
         newNamespace3:{ext:print(ext:newNamespace3(doc('')/*))}
-        newNamespace3:{ext:print(doc('')//node()[not(. instance of text())])}
+        all-nodes:    {ext:print(doc('')//node()[not(. instance of text())])}
         ext:print():     {ext:print($langItems,10,'  ')}
         fn:serialize():  {serialize($langItems,map{'method':'adaptive'})}
       </xsl:message>
