@@ -11,6 +11,10 @@
   <xsl:mode on-no-match="shallow-copy"/>
   <xsl:import href="../src/xpath-result-serializer.xsl"/>
   
+  <ext:data-island name="test"/>
+  <!-- test comment -->
+  <?pi href="abcd"?>
+  
   <xsl:template match="/*" mode="#all">
     <xsl:variable name="text" as="xs:string" select="unparsed-text('../sample/data.json')"/>
     <xsl:variable name="jsonObject" as="map(*)" select="parse-json($text)"/>
@@ -38,7 +42,7 @@
         newNamespace: {ext:print(ext:newNamespace())}
         newNamespace2:{ext:print(ext:newNamespace2())}
         newNamespace3:{ext:print(ext:newNamespace3(doc('')/*))}
-        newNamespace3:{ext:print(doc('')/*/*)}
+        newNamespace3:{ext:print(doc('')//node()[not(. instance of text())])}
         ext:print():     {ext:print($langItems,10,'  ')}
         fn:serialize():  {serialize($langItems,map{'method':'adaptive'})}
       </xsl:message>

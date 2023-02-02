@@ -33,8 +33,6 @@
   
   <xsl:include _href="{$colorDataName}"/>
   
-  <xsl:variable name="xmlnsMap" as="map(*)" select="ext:getURItoPrefixMap(/*)"/>
-  
   <xsl:function name="ext:println" as="xs:string">
     <xsl:param name="xdmValue" as="item()*"/>
     <xsl:sequence select="ext:print($xdmValue) || $LF"/>
@@ -69,11 +67,13 @@
   
   <xsl:function name="ext:tidyXPath" as="xs:string*">
     <xsl:param name="node" as="node()"/>
+    <xsl:variable name="xmlns" as="map(*)" select="let $e:= $node/ancestor-or-self::*[1] return if ($e) then ext:getURItoPrefixMap($e) else map{}"/>
+
     <xsl:variable name="parts" as="xs:string*">
       <xsl:analyze-string select="path($node)" regex="{$regex}">
         <xsl:matching-substring>
           <xsl:variable name="uri" as="xs:string" select="substring(., 3, string-length(.) - 3)"/>
-          <xsl:variable name="pfx" select="map:get($xmlnsMap, $uri)"/>
+          <xsl:variable name="pfx" select="map:get($xmlns, $uri)"/>
           <xsl:sequence select="if (string-length($pfx) eq 0) then '' else $pfx || ':'"/>
         </xsl:matching-substring>
         <xsl:non-matching-substring>
@@ -84,7 +84,7 @@
     <xsl:sequence select="string-join($parts)"/>
   </xsl:function>
   
-  <xsl:function name="ext:convertMapEntry">
+  <xsl:function name="ext:convertMapEntry"> 
     <xsl:param name="k" as="xs:anyAtomicType?"/>
     <xsl:param name="value" as="item()*"/>
     
