@@ -146,7 +146,7 @@
           <xsl:if test="$key">
             <xsl:attribute name="key" select="$key"/>
           </xsl:if>
-          <xsl:attribute name="text" select="if ($nodeType eq 'element') then (if (has-children()) then ext:formatValue(., 18) else ext:formatValue('[empty-element]', 18)) else ext:formatValue(., 18)"/>
+          <xsl:attribute name="text" select="ext:getText(., $nodeType)"/>
           <xsl:attribute name="type" select="$nodeType"/>
           <xsl:attribute name="location" select="ext:tidyXPath(.)"/>
           <xsl:choose>
@@ -207,6 +207,18 @@
       
     </xsl:choose>
   </xsl:template>
+  
+  <xsl:function name="ext:getText" as="item()*">
+    <xsl:param name="c.x" as="item()*"/>
+    <xsl:param name="nodeType" as="xs:string?"/>
+    <xsl:variable name="maxLength" as="xs:integer" select="25"/>
+    <xsl:sequence select="
+      if ($nodeType eq 'element') then 
+        (if (normalize-space($c.x) ne '') then ext:formatValue($c.x, $maxLength) else let $a := $c.x/(@name,@id,@class,@*)[1] return 
+              if ($a) then ext:formatValue('@' || name($a) || '=' || xs:string($a), $maxLength) else ext:formatValue('[empty-element]', $maxLength))
+      else ext:formatValue($c.x, $maxLength)"/>
+  </xsl:function>
+  
   
   <xsl:function name="ext:explainNode" as="item()*">
     <xsl:param name="c.x" as="node()?"/>
@@ -291,7 +303,8 @@
             <xsl:sequence select="$key || '{' || ext:recurseForChildren(., $level, $spaceChars) || '}'"/>
           </xsl:when>
           <xsl:when test="self::path">
-            <xsl:value-of select="$key || ext:nodeColor(@type) || @text || $YELLOW || ext:explainNode(node(), @location) || $RESET"/>
+            <xsl:variable name="text" as="xs:string" select="if (matches(@text, '^@[^\s]+=')) then $BLACK || substring-before(@text,'=') || '=' || $GREEN || substring-after(@text,'=') else @text"/>
+            <xsl:value-of select="$key || ext:nodeColor(@type) || $text || $YELLOW || ext:explainNode(node(), @location) || $RESET"/>
           </xsl:when>
           <xsl:when test="self::atomicValue">
             <xsl:variable name="color" as="xs:string" 

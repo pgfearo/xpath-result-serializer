@@ -12,6 +12,7 @@
   <xsl:import href="../src/xpath-result-serializer.xsl"/>
   
   <ext:data-island name="test"/>
+  <ext:content name="test">some content</ext:content>
   <!-- test comment -->
   <?pi href="abcd"?>
   
@@ -39,6 +40,7 @@
         newText:      {ext:print($newText,12,'  ')}
         newComment:   {ext:print($newComment,12,'  ')}
         newPI:        {ext:print($newPI,12,'  ')}
+        textNode:     {ext:print(doc('')/*/ext:content/text())}
         newNamespace: {ext:print(ext:newNamespace())}
         newNamespace2:{ext:print(ext:newNamespace2())}
         newNamespace3:{ext:print(ext:newNamespace3(doc('')/*))}
