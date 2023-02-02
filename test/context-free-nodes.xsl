@@ -35,7 +35,12 @@
         newText:      {ext:print($newText,12,'  ')}
         newComment:   {ext:print($newComment,12,'  ')}
         newPI:        {ext:print($newPI,12,'  ')}
-        language:     {ext:print($langItems,10,'  ')}
+        newNamespace: {ext:print(ext:newNamespace())}
+        newNamespace2:{ext:print(ext:newNamespace2())}
+        newNamespace3:{ext:print(ext:newNamespace3(doc('')/*))}
+        newNamespace3:{ext:print(doc('')/*/*)}
+        ext:print():     {ext:print($langItems,10,'  ')}
+        fn:serialize():  {serialize($langItems,map{'method':'adaptive'})}
       </xsl:message>
       
       <result>
@@ -55,6 +60,19 @@
   
   <xsl:function name="ext:newComment" as="comment()">
     <xsl:comment select="'A remarkable day'"/>
+  </xsl:function>
+  
+  <xsl:function name="ext:newNamespace" as="namespace-node()">
+    <xsl:namespace name="smp" select="'com.sample.namespace'"/>
+  </xsl:function>
+  
+  <xsl:function name="ext:newNamespace2" as="namespace-node()">
+    <xsl:namespace name="{''}" select="'com.sample.namespace'"/>
+  </xsl:function>
+  
+  <xsl:function name="ext:newNamespace3" as="namespace-node()">
+    <xsl:param name="c.x" as="element()"/>
+    <xsl:sequence select="$c.x/namespace::node()[1]"/>
   </xsl:function>
   
   <xsl:function name="ext:newProcessingInstruction" as="processing-instruction()">

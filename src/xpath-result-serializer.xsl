@@ -160,6 +160,11 @@
                 <xsl:copy-of select="."/>
               </ext:attribute>
             </xsl:when>
+            <xsl:when test="$nodeType eq 'namespace-node'">
+              <ext:namespace>
+                <xsl:copy-of select="."/>
+              </ext:namespace>
+            </xsl:when>
             <xsl:otherwise>
               <xsl:copy-of select="."/>
             </xsl:otherwise>
@@ -212,6 +217,12 @@
           <xsl:when test="$c.x[self::ext:attribute]">
             <xsl:sequence select="name($c.x/@*) || '=&quot;' || $c.x/@* || '&quot;'"/>
           </xsl:when>
+          <xsl:when test="$c.x[self::ext:namespace]">
+            <xsl:variable name="prefix" as="xs:string?" select="in-scope-prefixes($c.x)[not(. = ('xml','ext'))][1]"/>
+            <xsl:variable name="namespace-uri" as="xs:anyURI" select="namespace-uri-for-prefix($prefix, $c.x)"/>
+            <xsl:variable name="p" as="xs:string" select="if ($prefix) then ':' || $prefix else ''"/>
+            <xsl:sequence select="'xmlns' || $p || '=&quot;' || $namespace-uri  || '&quot;'"/>
+          </xsl:when>
           <xsl:when test="$c.x instance of element()">
             <xsl:variable name="selfClose" as="xs:string" select="if (has-children($c.x)) then '' else '/'"/>
             <xsl:variable name="startTag" select="'&lt;' || name($c.x) || ' ' || string-join(for $a in $c.x/@* return name($a) || '=&quot;' || $a || '&quot;', ' ') || $selfClose || '&gt;'"/>
@@ -222,7 +233,7 @@
             <xsl:sequence select="'&quot;' || $c.x || '&quot;'"/>
           </xsl:when>
           <xsl:when test="$c.x instance of comment()">
-            <xsl:sequence select="'&lt;!--' || $c.x || '--&gt;'"/>
+            <xsl:sequence select="'&lt;!-- ' || $c.x || ' --&gt;'"/>
           </xsl:when>
           <xsl:when test="$c.x instance of processing-instruction()">
             <xsl:sequence select="'&lt;?' || name($c.x) || ' ' || $c.x || ' ?&gt;'"/>            
