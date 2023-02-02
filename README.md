@@ -8,20 +8,27 @@ Using two XSLT functions, `print()` and `println()`, the result of an XPath expr
 > `fn:serialize($n, map{'method':'adaptive'})`<br>
 > The XSLT functions here simply provide more extensibility for features such as coloring and indentation 
 
-## Main differences from JSON:
+---
+### Sample Usage
+```xml
+    <xsl:message expand-text="yes">
+      ==== Root element ====
+      languages-count:  {node-name() => ext:print(9,'  ')}
+      colorNodes:  {ext:print((*,*/@*),9,'  ')}
+      
+    </xsl:message>
+    <xsl:copy>    
+      <xsl:message expand-text="yes">
+        ==== data====
+        context:     {ext:print(.,10,'  ')}
+        language:    {ext:print($langItems,10,'  ')}
+      </xsl:message>
+```
 
-1. XPath sequences are represented with parenthesis like: '(1,2,3,4)'
-2. Map keys are enclosed in single-quotes and then only if they are of type xs:string
-3. Atomic values are enclosed in single-quotes but then only if they are of type xs:string
-4. Boolean values are represented as: true() and false()
-5. Nodes are represented by XPath locations - namespace-prefixes are used in the location if declared on the context root element
-6. Colorised output via ANSI escape sequences (requires messageEmitter setting - only available for SaxonJ versions prior to 9.9.0.2) 
 
+Screenshot from the xsl:message output shown above in the VS Code terminal using `ext:print()` and `ext:println()`:
 
-### Sample xsl:message output
-The xsl:message output to the VS Code terminal using `ext:print()` and `ext:println()`:
-
-<img src="sample/colorised-xpath.png" width="800px">
+<img src="sample/colorised-xpath.png" width="500px" style="border-style:solid; border-width:1px;border-color:#808080">
 
 ## Key Resource Files
 - Source XSLT: `src/xpath-result-serializer.xsl`
@@ -29,6 +36,8 @@ The xsl:message output to the VS Code terminal using `ext:print()` and `ext:prin
 
 ## Colorising of xsl:message Output with Saxon
 
-If a Saxon version prior to `9.9.0.1` is detected, ANSI escape sequences are included in the outputs of `ext:print()` and `ext:println()` to provide colorisation (see screenshot).
+If a Saxon version prior to `9.9.0.1` is detected, ANSI codes are included in the outputs of `ext:print()` and `ext:println()` to provide colorisation (see screenshot).
 
-These escape sequences would normally escaped as XML character references in the result. In SaxonJ, prior to v9.9.0.2, the command-line option `-m:net.sf.saxon.serialize.TEXTEmitter` can be used to prevent this XML escaping so xsl:message colors can be seen as intended.
+These ANSI would normally escaped as XML character references in the result. In SaxonJ, prior to v9.9.0.2, the command-line option `-m:net.sf.saxon.serialize.TEXTEmitter` can be used to prevent this XML escaping so xsl:message colors can be seen as intended.
+
+To prevent escaping of ANSI codes with the Saxon API - see the Saxon [Message Output Documentation](https://www.saxonica.com/documentation12/index.html#!using-xsl/stylesheet-output/message-output).
