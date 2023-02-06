@@ -1,50 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <colors>
-   <result xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:array="http://www.w3.org/2005/xpath-functions/array"
-           xmlns:map="http://www.w3.org/2005/xpath-functions/map"
-           xmlns:ext="com.deltaxml.xpath.result.print">
+   <result xmlns:array="http://www.w3.org/2005/xpath-functions/array"
+            xmlns:ext="com.deltaxml.xpath.result.print"
+            xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <array>
          <map>
-            <atomicValue key="'enabled'" type="boolean">false()</atomicValue>
             <array key="'extensions'">
                <atomicValue type="string">'.dcp'</atomicValue>
             </array>
-            <atomicValue key="'pos'" type="numeric">2288</atomicValue>
-            <atomicValue key="'id'" type="string">'dcp'</atomicValue>
             <array key="'aliases'">
                <atomicValue type="string">'DCP'</atomicValue>
-               <array>
-                  <atomicValue type="string">'dcp'</atomicValue>
-                  <atomicValue type="string">'dcp1'</atomicValue>
-                  <atomicValue type="string">'dcp2'</atomicValue>
-               </array>
+               <atomicValue type="string">'dcp'</atomicValue>
+               <atomicValue type="string">'dcp1'</atomicValue>
+               <atomicValue type="string">'dcp2'</atomicValue>
             </array>
+            <atomicValue key="'pos'" type="numeric">2288</atomicValue>
+            <atomicValue key="'id'" type="string">'dcp'</atomicValue>
+            <atomicValue key="'enabled'" type="boolean">false()</atomicValue>
          </map>
          <map>
-            <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
             <array key="'extensions'">
                <atomicValue type="string">'.xpath'</atomicValue>
             </array>
-            <atomicValue key="'pos'" type="numeric">1789</atomicValue>
-            <atomicValue key="'id'" type="string">'xpath'</atomicValue>
             <array key="'aliases'">
                <atomicValue type="string">'XPath'</atomicValue>
                <atomicValue type="string">'xpath'</atomicValue>
             </array>
+            <atomicValue key="'pos'" type="numeric">1789</atomicValue>
+            <atomicValue key="'id'" type="string">'xpath'</atomicValue>
+            <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
          </map>
          <map>
-            <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
             <array key="'extensions'">
                <atomicValue type="string">'.xsl'</atomicValue>
                <atomicValue type="string">'.xslt'</atomicValue>
             </array>
-            <atomicValue key="'pos'" type="numeric">189</atomicValue>
-            <atomicValue key="'id'" type="string">'xslt'</atomicValue>
             <array key="'aliases'">
                <atomicValue type="string">'XSLT'</atomicValue>
                <atomicValue type="string">'xslt'</atomicValue>
             </array>
+            <atomicValue key="'pos'" type="numeric">189</atomicValue>
+            <atomicValue key="'id'" type="string">'xslt'</atomicValue>
+            <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
          </map>
       </array>
    </result>

@@ -9,7 +9,7 @@
   
   <xsl:output method="xml" indent="yes"/>
   <xsl:mode on-no-match="shallow-copy"/>
-  <xsl:import href="../src/xpath-result-serializer.xsl"/>
+  <xsl:import href="../src/xpath-result-serializer-color.xsl"/>
   
   <xsl:template match="/*" mode="#all">
     <xsl:variable name="text" as="xs:string" select="unparsed-text('data.json')"/>
