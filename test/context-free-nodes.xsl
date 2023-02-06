@@ -9,7 +9,7 @@
   
   <xsl:output method="xml" indent="yes"/>
   <xsl:mode on-no-match="shallow-copy"/>
-  <xsl:import href="../src/xpath-result-serializer.xsl"/>
+  <xsl:import href="../src/xpath-result-serializer-color.xsl"/>
   
   <ext:data-island name="test"/>
   <ext:content name="test">some content</ext:content>
