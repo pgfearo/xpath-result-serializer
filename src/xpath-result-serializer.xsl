@@ -22,7 +22,7 @@
   <xsl:variable name="product-version-parts" static="yes" as="xs:string+" 
     select="system-property('Q{http://www.w3.org/1999/XSL/Transform}product-version') => tokenize('\s+')"/>
   <xsl:variable name="saxon-major-minor-patch" static="yes" as="xs:string*" select="$product-version-parts[2] => tokenize('\.')"/>
-  <xsl:variable name="major" static="yes" as="xs:integer" select="$saxon-major-minor-patch[1] => xs:integer()"/>
+  <xsl:variable name="major" static="yes" as="xs:integer" select="($saxon-major-minor-patch[1] => xs:integer(), 0)[1]"/>
   <xsl:variable name="minor" static="yes" as="xs:integer" select="($saxon-major-minor-patch[2] => xs:integer(), 0)[1]"/>
   <xsl:variable name="patch" static="yes" as="xs:integer" select="($saxon-major-minor-patch[3] => xs:integer(), 0)[1]"/>
   <xsl:variable name="patch-version" static="yes" as="xs:integer" select="($saxon-major-minor-patch[4] => xs:integer(), 0)[1]"/>

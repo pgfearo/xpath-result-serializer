@@ -13,7 +13,6 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			// WARNING: Error occurs with Saxon 9.9.0.2+ with messageEscaping: "off"
 			"messageEscaping": "adaptive",
 			"problemMatcher": [
 				"$saxon-xslt"
@@ -31,10 +30,22 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			// WARNING: Error occurs with Saxon 9.9.0.2+ with messageEscaping: "off"
 			"messageEscaping": "adaptive",
 			"problemMatcher": [
 				"$saxon-xslt"
+			]
+		},
+		{
+			"type": "xslt-js",
+			"label": "xslt-js: Saxon-JS Transform (New)",
+			"xsltFile": "${command:xslt-xpath.pickXsltFile}",
+			"xmlSource": "${file}",
+			"resultPath": "${command:xslt-xpath.pickResultFile}",
+			"group": {
+				"kind": "build"
+			},
+			"problemMatcher": [
+				"$saxon-xslt-js"
 			]
 		}
 	]
