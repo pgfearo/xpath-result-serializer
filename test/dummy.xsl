@@ -4,12 +4,10 @@
                 xmlns:array="http://www.w3.org/2005/xpath-functions/array"
                 xmlns:map="http://www.w3.org/2005/xpath-functions/map"
                 xmlns:math="http://www.w3.org/2005/xpath-functions/math"
-                xmlns:ext="com.deltaxml.xpath.result.print"
                 exclude-result-prefixes="#all"
                 expand-text="yes"
                 version="3.0">
   
-  <xsl:include href="../src/xpath-result-serializer-color.xsl"/>
   <xsl:output method="xml" indent="yes"/>
   <xsl:mode on-no-match="shallow-copy"/>
   

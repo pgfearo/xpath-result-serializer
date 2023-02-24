@@ -32,12 +32,16 @@ Screenshot from the xsl:message output shown above in the VS Code terminal using
 
 ## Key Resource Files
 - Source XSLT: `src/xpath-result-serializer.xsl`
+- Source XSLT: `src/xpath-result-serializer-color.xsl`
 - Sample: `sample/test-serializer.xsl`
 
 ## Colorising of xsl:message Output with Saxon
 
-If a Saxon version prior to `9.9.0.1` is detected, ANSI codes are included in the outputs of `ext:print()` and `ext:println()` to provide colorisation (see screenshot).
+When using `src/xpath-result-serializer.xsl`, only if a Saxon version prior to `9.9.0.1` is detected, ANSI escape codes are included in the outputs of `ext:print()` and `ext:println()` to provide colorisation (see screenshot). 
 
-These ANSI would normally escaped as XML character references in the result. In SaxonJ, prior to v9.9.0.2, the command-line option `-m:net.sf.saxon.serialize.TEXTEmitter` can be used to prevent this XML escaping so xsl:message colors can be seen as intended.
+The `src/xpath-result-serializer-color.xsl` stylesheeet is a thin wrapper that forces colorising using ANSI escape codes regardless of Saxon version.
 
-To prevent escaping of ANSI codes with the Saxon API - see the Saxon [Message Output Documentation](https://www.saxonica.com/documentation12/index.html#!using-xsl/stylesheet-output/message-output).
+These ANSI codes are normally escaped as XML character references by SaxonJ (Java) in the output. In SaxonJ, prior to v9.9.0.2, the command-line option `-m:net.sf.saxon.serialize.TEXTEmitter` can be used to prevent this XML escaping so xsl:message colors can be seen as intended.
+
+### SaxonJ Command-line Wrapper
+If you want color output with SaxonJ versions after 9.9.0.1 then you need use the API to add a simple messageListener to ouput text-only. Thin wrappers for the SaxonJ command-line-interface that implement this are [maintained on GitHub](https://github.com/pgfearo/alt-saxon-xslt-cli). There are different branches for Saxon 9.9, 10.0, 11.0 and 12.0.
