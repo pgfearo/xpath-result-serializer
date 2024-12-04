@@ -6,7 +6,6 @@
     <xsl:variable name="LF" as="xs:string" select="'&#10;'"/>
     <xsl:variable name="RESET" as="xs:string" select="'&#x1B;[0m'"/>
     
-    <xsl:variable name="COLOR" as="xs:string" select="'heloo'"/>
     <xsl:variable name="BLACK" as="xs:string" select="'&#x1B;[0;30m'"/>
     <xsl:variable name="RED" as="xs:string" select="'&#x1B;[0;31m'"/>
     <xsl:variable name="GREEN" as="xs:string" select="'&#x1B;[0;32m'"/>
