@@ -52,6 +52,24 @@
     <xsl:sequence select="ext:xml-to-xdm($enclosedItems, $level, $spaceChars) || $RESET"/>
   </xsl:function>
   
+  <xsl:function name="ext:log" as="item()*">
+    <xsl:param name="xdmValue" as="item()*"/>
+    <xsl:param name="label" as="xs:string"/>
+    <xsl:message select="ext:formatValue($label || ':', 26) || ' ' || ext:print($xdmValue,12,'  ')"/>
+  </xsl:function>
+  
+  <xsl:function name="ext:log" as="item()*">
+    <xsl:param name="label" as="xs:string"/>
+    <xsl:message select="$label"/>
+  </xsl:function>
+  
+  <xsl:function name="ext:trace" as="item()*">
+    <xsl:param name="xdmValue" as="item()*"/>
+    <xsl:param name="label" as="xs:string"/>
+    <xsl:sequence select="ext:log($xdmValue, $label)"/>
+    <xsl:sequence select="$xdmValue"/>
+  </xsl:function>
+  
   <xsl:function name="ext:bracketColor" as="xs:string">
     <xsl:param name="index" as="xs:integer"/>
     <xsl:variable name="resolved" as="xs:integer" 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sections xmlns:ccl="com.deltaxml.ccl">
+   <section>
+      <p>the quick<bold> brown fox<underline> jumps</underline> over</bold> the lazy dog</p>
+   </section>
+</sections>

@@ -1,46 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<colors>
-   <result xmlns:array="http://www.w3.org/2005/xpath-functions/array" xmlns:ext="com.deltaxml.xpath.result.print" xmlns:map="http://www.w3.org/2005/xpath-functions/map" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <array>
-         <map>
-            <atomicValue key="'enabled'" type="boolean">false()</atomicValue>
-            <array key="'aliases'">
-               <atomicValue type="string">'DCP'</atomicValue>
-               <atomicValue type="string">'dcp'</atomicValue>
-               <atomicValue type="string">'dcp1'</atomicValue>
-               <atomicValue type="string">'dcp2'</atomicValue>
-            </array>
-            <array key="'extensions'">
-               <atomicValue type="string">'.dcp'</atomicValue>
-            </array>
-            <atomicValue key="'id'" type="string">'dcp'</atomicValue>
-            <atomicValue key="'pos'" type="numeric">2288</atomicValue>
-         </map>
-         <map>
-            <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
-            <array key="'aliases'">
-               <atomicValue type="string">'XPath'</atomicValue>
-               <atomicValue type="string">'xpath'</atomicValue>
-            </array>
-            <array key="'extensions'">
-               <atomicValue type="string">'.xpath'</atomicValue>
-            </array>
-            <atomicValue key="'id'" type="string">'xpath'</atomicValue>
-            <atomicValue key="'pos'" type="numeric">1789</atomicValue>
-         </map>
-         <map>
-            <atomicValue key="'enabled'" type="boolean">true()</atomicValue>
-            <array key="'aliases'">
-               <atomicValue type="string">'XSLT'</atomicValue>
-               <atomicValue type="string">'xslt'</atomicValue>
-            </array>
-            <array key="'extensions'">
-               <atomicValue type="string">'.xsl'</atomicValue>
-               <atomicValue type="string">'.xslt'</atomicValue>
-            </array>
-            <atomicValue key="'id'" type="string">'xslt'</atomicValue>
-            <atomicValue key="'pos'" type="numeric">189</atomicValue>
-         </map>
-      </array>
-   </result>
-</colors>
+<html xmlns:ccl="com.deltaxml.ccl">
+   <body>
+    <!-- IMAGECOUNT -->
+      <table width="100%">
+         <tr>
+            <td colspan="1" rowspan="1">
+               <strong>
+            2 Images
+          </strong>
+            </td>
+         </tr>
+      </table>
+      <!-- /IMAGECOUNT -->
+      <p>
+         <strong>
+        <!-- SECTION -->
+        The section 
+        <!-- /SECTION -->
+        <!-- COUNTRY -->
+        The country
+        <!-- /COUNTRY -->
+        
+        
+      </strong>
+      </p>
+      <!-- DATE -->
+      <p>
+         <font size="-1">
+            <b>Date Posted: 09-Dec-2019</b>
+         </font>
+      </p>
+      <!-- /DATE -->
+      <!-- TEXT -->
+      <center>
+         <p>
+            <font size="-1">
+          Just some text
+        </font>
+         </p>
+      </center>
+      <!-- /TEXT -->
+      <!-- TOP_THUMBNAILS -->
+      <table class="tabletopbottom" width="100%">
+         <tr>
+            <td colspan="1" rowspan="1">
+          <!-- INNER -->
+          <!-- DOUBLE -->
+               <img src="images/s1353556.jpg" alt="Cat"/>
+               <img src="images/s1164352.jpg" alt="Dog"/>
+               <!-- /DOUBLE -->
+               <!-- /INNER -->
+            </td>
+         </tr>
+      </table>
+      <!-- /TOP_THUMBNAILS -->
+   </body>
+</html>

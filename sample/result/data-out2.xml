@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <colors>
-   <result xmlns:array="http://www.w3.org/2005/xpath-functions/array"
-            xmlns:ext="com.deltaxml.xpath.result.print"
-            xmlns:map="http://www.w3.org/2005/xpath-functions/map"
-            xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <result xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:array="http://www.w3.org/2005/xpath-functions/array"
+           xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+           xmlns:ext="com.deltaxml.xpath.result.print">
       <array>
          <map>
             <array key="'extensions'">
@@ -11,9 +11,11 @@
             </array>
             <array key="'aliases'">
                <atomicValue type="string">'DCP'</atomicValue>
-               <atomicValue type="string">'dcp'</atomicValue>
-               <atomicValue type="string">'dcp1'</atomicValue>
-               <atomicValue type="string">'dcp2'</atomicValue>
+               <array>
+                  <atomicValue type="string">'dcp'</atomicValue>
+                  <atomicValue type="string">'dcp1'</atomicValue>
+                  <atomicValue type="string">'dcp2'</atomicValue>
+               </array>
             </array>
             <atomicValue key="'pos'" type="numeric">2288</atomicValue>
             <atomicValue key="'id'" type="string">'dcp'</atomicValue>

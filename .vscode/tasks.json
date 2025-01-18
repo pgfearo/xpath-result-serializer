@@ -34,6 +34,22 @@
 			]
 		},
 		{
+			"type": "xslt",
+			"label": "test-trace",
+			"saxonJar": "${config:XSLT.tasks.saxonJar}",
+			"xsltFile": "${workspaceFolder}/test/fold-left/reconstruct-from-milestones-fold-left.xsl",
+			"xmlSource": "${workspaceFolder}/test/fold-left/input1.xml",
+			"resultPath": "${workspaceFolder}/sample/result/data-out4.xml",
+			"allowSyntaxExtensions40": "off",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [
+				"$saxon-xslt"
+			]
+		},
+		{
 			"type": "xslt-js",
 			"label": "test JS",
 			"xsltFile": "${workspaceFolder}/test/context-free-nodes.xsl",

@@ -1,0 +1,19 @@
+<sections xmlns:ccl="com.deltaxml.ccl">
+  <section>
+    <p ccl:flattened="true">
+      <ccl:text>the</ccl:text>
+      <ccl:text> quick</ccl:text>
+      <ccl:milestone start="bold"/>
+      <ccl:text> brown</ccl:text>
+      <ccl:text> fox</ccl:text>
+      <ccl:milestone start="underline"/>
+      <ccl:text> jumps</ccl:text>
+      <ccl:milestone end="underline"/>
+      <ccl:text> over</ccl:text>
+      <ccl:milestone end="bold"/>
+      <ccl:text> the</ccl:text>
+      <ccl:text> lazy</ccl:text>
+      <ccl:text> dog</ccl:text>
+    </p>
+  </section>
+</sections>

@@ -1,0 +1,57 @@
+<html xmlns:ccl="com.deltaxml.ccl">
+  <body>
+    <!-- IMAGECOUNT -->
+    <table width="100%">
+      <tr>
+        <td colspan="1" rowspan="1">
+          <strong>
+            2 Images
+          </strong>
+        </td>
+      </tr>
+    </table>
+    <!-- /IMAGECOUNT -->
+    <p>
+      <strong>
+        <!-- SECTION -->
+        The section 
+        <!-- /SECTION -->
+        <!-- COUNTRY -->
+        The country
+        <!-- /COUNTRY -->
+        
+        
+      </strong>
+    </p>
+    <!-- DATE -->
+    <p>
+      <font size="-1">
+        <b>Date Posted: 09-Dec-2019</b>
+      </font>
+    </p>
+    <!-- /DATE -->
+    <!-- TEXT -->
+    <center>
+      <p>
+        <font size="-1">
+          Just some text
+        </font>
+      </p>
+    </center>
+    <!-- /TEXT -->
+    <!-- TOP_THUMBNAILS -->
+    <table class="tabletopbottom" width="100%">
+      <tr>
+        <td colspan="1" rowspan="1">
+          <!-- INNER -->
+          <!-- DOUBLE -->
+          <img src="images/s1353556.jpg" alt="Cat"/>
+          <img src="images/s1164352.jpg" alt="Dog"/>
+          <!-- /DOUBLE -->
+          <!-- /INNER -->
+        </td>
+      </tr>
+    </table>
+    <!-- /TOP_THUMBNAILS -->
+  </body>
+</html>
